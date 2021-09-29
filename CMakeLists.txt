@@ -1,15 +1,10 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.20)
 project(Venus)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Venus main.cpp)
+include_directories(${CMAKE_SOURCE_DIR}/include)
+link_directories(${CMAKE_SOURCE_DIR}/lib)
 
-find_package(CAF REQUIRED COMPONENTS core io)
-find_package(glog CONFIG REQUIRED)
-find_package(GTest CONFIG REQUIRED)
-
-target_link_libraries(${PROJECT_NAME} PRIVATE glog::glog)
-target_link_libraries(${PROJECT_NAME} PRIVATE GTest::gmock GTest::gtest GTest::gmock_main GTest::gtest_main)
-target_include_directories(${PROJECT_NAME} PRIVATE ${CAF_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} PRIVATE ${CAF_LIBRARIES})
+add_subdirectory(src)
+add_subdirectory(test)
